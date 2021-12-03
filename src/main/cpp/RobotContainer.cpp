@@ -6,13 +6,10 @@
 
 RobotContainer::RobotContainer() {
   // Initialize all of your commands and subsystems here
+  m_driveSubsystem.SetDefaultCommand(DriveTeleop(&m_driveSubsystem));
 
   // Configure the button bindings
   ConfigureButtonBindings();
-}
-
-void RobotContainer::Run(){
-  m_driveSubsystem.ArcadeDrive(1.0, 0.5);
 }
 
 void RobotContainer::ConfigureButtonBindings() {
@@ -23,3 +20,4 @@ frc2::Command* RobotContainer::GetAutonomousCommand() {
   // An example command will be run in autonomous
   return nullptr;
 }
+

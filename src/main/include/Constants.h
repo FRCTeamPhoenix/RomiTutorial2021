@@ -16,3 +16,10 @@
 
 const int MOTOR_LEFT = 0;
 const int MOTOR_RIGHT = 1;
+
+const int DRIVE_JOYSTICK = 0;
+
+const int LEFTSTICK_X = 0;
+const int LEFTSTICK_Y = 1;
+const int RIGHTSTICK_X = 4;
+const int RIGHTSTICK_Y = 5;

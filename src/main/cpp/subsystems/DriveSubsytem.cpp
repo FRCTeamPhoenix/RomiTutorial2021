@@ -6,6 +6,7 @@
 
 DriveSubsystem::DriveSubsystem() {
   // Implementation of subsystem constructor goes here.
+  m_rightMotor.SetInverted(true);
 }
 
 void DriveSubsystem::Periodic() {
