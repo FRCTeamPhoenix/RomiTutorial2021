@@ -10,6 +10,7 @@
 #include <frc/Encoder.h>
 #include <frc/drive/DifferentialDrive.h>
 #include <frc2/command/SubsystemBase.h>
+#include <units/length.h>
 
 class DriveSubsystem : public frc2::SubsystemBase {
  public:
@@ -27,6 +28,18 @@ class DriveSubsystem : public frc2::SubsystemBase {
   void SimulationPeriodic() override;
 
   void ArcadeDrive(double moveForward, double moveTurn);
+
+  void TankDrive(double leftSide, double rightSide);
+
+  void ZeroEncoders();
+
+  units::meter_t LeftDistance();
+
+  units::meter_t RightDistance();
+
+  units::meter_t CurrentDistance();
+
+  bool IsStopped();
 
  private:
   // Components (e.g. motor controllers and sensors) should generally be

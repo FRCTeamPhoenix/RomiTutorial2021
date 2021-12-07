@@ -4,9 +4,25 @@
 
 #include "subsystems/DriveSubsystem.h"
 
+#include <wpi/math>
+
 DriveSubsystem::DriveSubsystem() {
   // Implementation of subsystem constructor goes here.
   m_rightMotor.SetInverted(true);
+
+  m_leftEncoder.SetDistancePerPulse(wpi::math::pi * WHEEL_DIAMETER.to<double>() / TICKS_PER_REVOLUTION);
+  m_rightEncoder.SetDistancePerPulse(wpi::math::pi * WHEEL_DIAMETER.to<double>() / TICKS_PER_REVOLUTION);
+
+  //minimum velocity before considered stopped
+  m_leftEncoder.SetMinRate(MIN_RATE.to<double>());
+  m_rightEncoder.SetMinRate(MIN_RATE.to<double>());
+
+  //how long to be below min rate before stopping
+  m_leftEncoder.SetMaxPeriod(MAX_PERIOD);
+  m_rightEncoder.SetMaxPeriod(MAX_PERIOD);
+
+  m_leftEncoder.SetSamplesToAverage(2);
+  m_rightEncoder.SetSamplesToAverage(2);
 }
 
 void DriveSubsystem::Periodic() {
@@ -19,4 +35,29 @@ void DriveSubsystem::SimulationPeriodic() {
 
 void DriveSubsystem::ArcadeDrive(double moveForward, double moveTurn){
   m_differentialDrive.ArcadeDrive(moveForward, moveTurn);
+}
+
+void DriveSubsystem::TankDrive(double leftSide, double rightSide){
+  m_differentialDrive.TankDrive(leftSide, rightSide);
+}
+
+void DriveSubsystem::ZeroEncoders(){
+  m_rightEncoder.Reset();
+  m_leftEncoder.Reset();
+}
+
+units::meter_t DriveSubsystem::LeftDistance(){
+  return units::meter_t(m_leftEncoder.GetDistance());
+}
+
+units::meter_t DriveSubsystem::RightDistance(){
+  return units::meter_t(m_rightEncoder.GetDistance());
+}
+
+units::meter_t DriveSubsystem::CurrentDistance(){
+  return (LeftDistance() + RightDistance()) / 2.0;
+}
+
+bool DriveSubsystem::IsStopped(){
+  return m_leftEncoder.GetStopped() && m_rightEncoder.GetStopped();
 }

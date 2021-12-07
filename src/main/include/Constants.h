@@ -14,6 +14,10 @@
  * they are needed.
  */
 
+#include <units/length.h>
+#include <units/velocity.h>
+#include <units/time.h>
+
 const int MOTOR_LEFT = 0;
 const int MOTOR_RIGHT = 1;
 
@@ -23,3 +27,16 @@ const int LEFTSTICK_X = 0;
 const int LEFTSTICK_Y = 1;
 const int RIGHTSTICK_X = 4;
 const int RIGHTSTICK_Y = 5;
+
+const double TICKS_PER_REVOLUTION = 1440.0;
+const units::meter_t WHEEL_DIAMETER = 70_mm;
+//minimum velocity before considered stopped
+const units::meters_per_second_t MIN_RATE = 0.05_mps;
+//how long to be below min velocity before stopped
+const units::second_t MAX_PERIOD = 0.25_s;
+
+//good enough distance
+const units::meter_t PID_TOLERANCE = 30_mm;
+const double P = 24.0;
+const double I = 0.0;
+const double D = 0.8;
