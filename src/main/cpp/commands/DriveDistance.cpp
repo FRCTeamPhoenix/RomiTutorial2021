@@ -11,7 +11,7 @@ void DriveDistance::Initialize(){
     m_driveSubsystem->TankDrive(0.0, 0.0);
     m_driveSubsystem->ZeroEncoders();
     m_pidController.SetSetpoint(m_distance.to<double>());
-    m_pidController.SetTolerance(PID_TOLERANCE.to<double>());
+    m_pidController.SetTolerance(DISTANCE_PID_TOLERANCE.to<double>());
     std::cout << "started moving with distance: " << m_distance.to<double>() << std::endl;
 }
 

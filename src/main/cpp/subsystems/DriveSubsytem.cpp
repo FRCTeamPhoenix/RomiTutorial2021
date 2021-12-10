@@ -7,6 +7,8 @@
 #include <wpi/math>
 
 DriveSubsystem::DriveSubsystem() {
+  m_gyro.Reset();
+
   // Implementation of subsystem constructor goes here.
   m_rightMotor.SetInverted(true);
 
@@ -46,6 +48,10 @@ void DriveSubsystem::ZeroEncoders(){
   m_leftEncoder.Reset();
 }
 
+void DriveSubsystem::ZeroGyro(){
+  m_gyro.Reset();
+}
+
 units::meter_t DriveSubsystem::LeftDistance(){
   return units::meter_t(m_leftEncoder.GetDistance());
 }
@@ -60,4 +66,12 @@ units::meter_t DriveSubsystem::CurrentDistance(){
 
 bool DriveSubsystem::IsStopped(){
   return m_leftEncoder.GetStopped() && m_rightEncoder.GetStopped();
+}
+
+units::radian_t DriveSubsystem::GetAngleZ(){
+  return units::degree_t(m_gyro.GetAngleZ());
+}
+
+void DriveSubsystem::UpdateDebug(){
+  m_gyro.UpdateDebugValues();
 }

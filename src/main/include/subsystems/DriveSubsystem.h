@@ -5,12 +5,14 @@
 #pragma once
 
 #include "Constants.h"
+#include "sensors/RomiGyro.h"
 
 #include <frc/motorcontrol/Spark.h>
 #include <frc/Encoder.h>
 #include <frc/drive/DifferentialDrive.h>
 #include <frc2/command/SubsystemBase.h>
 #include <units/length.h>
+#include <units/angle.h>
 
 class DriveSubsystem : public frc2::SubsystemBase {
  public:
@@ -33,6 +35,8 @@ class DriveSubsystem : public frc2::SubsystemBase {
 
   void ZeroEncoders();
 
+  void ZeroGyro();
+
   units::meter_t LeftDistance();
 
   units::meter_t RightDistance();
@@ -41,6 +45,9 @@ class DriveSubsystem : public frc2::SubsystemBase {
 
   bool IsStopped();
 
+  units::radian_t GetAngleZ();
+
+  void UpdateDebug();
  private:
   // Components (e.g. motor controllers and sensors) should generally be
   // declared private and exposed only through public methods.
@@ -51,4 +58,6 @@ class DriveSubsystem : public frc2::SubsystemBase {
   frc::Encoder m_rightEncoder{6, 7};
 
   frc::DifferentialDrive m_differentialDrive{m_leftMotor, m_rightMotor};
+
+  RomiGyro m_gyro;
 };

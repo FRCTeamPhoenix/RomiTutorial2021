@@ -21,3 +21,6 @@ frc2::Command* RobotContainer::GetAutonomousCommand() {
   return &m_driveDistance;
 }
 
+void RobotContainer::UpdateDebug(){
+  m_driveSubsystem.UpdateDebug();
+}

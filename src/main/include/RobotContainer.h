@@ -26,6 +26,8 @@ class RobotContainer {
   frc2::Command* GetAutonomousCommand();
 
   frc2::Command* GetTeleopCommand();
+  
+  void UpdateDebug();
 
  private:
   // The robot's subsystems and commands are defined here...

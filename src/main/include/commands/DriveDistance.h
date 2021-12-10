@@ -24,5 +24,5 @@ private:
     DriveSubsystem* m_driveSubsystem;
     units::meter_t m_distance;
 
-    frc2::PIDController m_pidController{P, I, D};
+    frc2::PIDController m_pidController{DISTANCE_P, DISTANCE_I, DISTANCE_D};
 };
